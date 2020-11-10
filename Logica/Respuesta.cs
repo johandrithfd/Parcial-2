@@ -27,6 +27,10 @@ namespace Logica
             Mensaje = mensaje;
             Error = error;
         }
+        public Respuesta()
+        {
+
+        }
         public Respuesta(G elemento) {
             Elemento = elemento;
         }

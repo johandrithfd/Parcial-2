@@ -12,6 +12,7 @@ namespace Entidad
         public int AbonoId { get; set; }
         [Column(TypeName = "decimal(12,2)")]
         public decimal ValorAbono { get; set; }
+        public DateTime Fecha { get; set; }
         public int CreditoId { get; set; }
 
     }
