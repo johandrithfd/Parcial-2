@@ -33,7 +33,7 @@ namespace ParcialCorte2_ProgWeb.Controllers
                 return TotalizarMonto();
             }
         }
-        private ActionResult<PeticionConsulta<PersonaViewModel>> Consultar()
+        private ActionResult<RespuestaConsulta<PersonaViewModel>> Consultar()
         {
             var peticion = _servicioPersona.ConsultarTodos();
             return Ok(peticion);
@@ -45,7 +45,7 @@ namespace ParcialCorte2_ProgWeb.Controllers
         }
         // POST: api/Persona
         [HttpPost]
-        public ActionResult<Peticion<PersonaViewModel>> Guardar(PersonaInputModel personaInput)
+        public ActionResult<Respuesta<PersonaViewModel>> Guardar(PersonaInputModel personaInput)
         {
             Persona persona = MapearPersona(personaInput);
             var peticion = _servicioPersona.Guardar(persona);

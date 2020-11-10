@@ -7,26 +7,26 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Logica
 {
-    public class ServicioPersona
+    public class ServicioCredito
     {
-        private readonly ParcialContext _contexto;
+        private readonly CreditoContext _contexto;
 
-        public ServicioPersona(ParcialContext contexto)
+        public ServicioCredito(CreditoContext contexto)
         {
             _contexto = contexto;
         }
 
-        public Peticion<Persona> Guardar(Persona Persona)
+        public Respuesta<Credito> Guardar(Credito Credito)
         {
-            Peticion<Persona> peticion = new Peticion<Persona>(Persona);
+            Respuesta<Credito> peticion = new Respuesta<Credito>(Credito);
             try
             {
                 peticion = EjecutarValidaciones(peticion);
                 if (peticion.Elemento != null)
                 {
-                    peticion = new Peticion<Persona>(Persona,$"Los datos de {Persona.Nombres} han sido guardados correctamente",false);
+                    peticion = new Respuesta<Credito>(Credito,$"Los datos de {Credito.Nombres} han sido guardados correctamente",false);
                     peticion.Elemento.Apoyo.Fecha = DateTime.Now.ToString();
-                    _contexto.Personas.Add(peticion.Elemento);
+                    _contexto.Creditos.Add(peticion.Elemento);
                     _contexto.SaveChanges();
                 }
             }
@@ -38,60 +38,60 @@ namespace Logica
             return peticion;
         }
 
-        public Peticion<Persona> EjecutarValidaciones(Peticion<Persona> peticion)
+        public Respuesta<Credito> EjecutarValidaciones(Respuesta<Credito> peticion)
         {
-                Persona persona = peticion.Elemento;
+                Credito Credito = peticion.Elemento;
                 peticion = BuscarPorIdentificacion(peticion.Elemento.Identificacion);
                 if (peticion.Elemento == null)
                 {
-                    peticion.Elemento = persona;
+                    peticion.Elemento = Credito;
                     peticion = ValidarMonto(peticion);
                 }
                 else
-                    peticion = new Peticion<Persona>(null,"La persona que intenta guardar ya se encuentra registrada (cédula existente)",true);
+                    peticion = new Respuesta<Credito>(null,"La Credito que intenta guardar ya se encuentra registrada (cédula existente)",true);
             return peticion;
         }
-        public Peticion<Persona> BuscarPorIdentificacion(string Identificacion)
+        public Respuesta<Credito> BuscarPorIdentificacion(string Identificacion)
         {
-            Peticion<Persona> peticion = new Peticion<Persona>(new Persona());
+            Respuesta<Credito> peticion = new Respuesta<Credito>(new Credito());
             try
             {
-                peticion.Elemento = _contexto.Personas.Find(Identificacion);
-                peticion = (peticion.Elemento == null) ? new Peticion<Persona>(null,$"La Persona con cédula numero {Identificacion} no se encuentra registrada",true):
-                new Peticion<Persona>(peticion.Elemento,"Persona encontrada",false);
+                peticion.Elemento = _contexto.Creditos.Find(Identificacion);
+                peticion = (peticion.Elemento == null) ? new Respuesta<Credito>(null,$"La Credito con cédula numero {Identificacion} no se encuentra registrada",true):
+                new Respuesta<Credito>(peticion.Elemento,"Credito encontrada",false);
             }
             catch (Exception E)
             {
-                peticion = new Peticion<Persona>(null,"Error de la aplicación: " + E.Message,true);
+                peticion = new Respuesta<Credito>(null,"Error de la aplicación: " + E.Message,true);
             }
             return peticion;
         }
-        public Peticion<Persona> ValidarMonto(Peticion<Persona> peticion)
+        public Respuesta<Credito> ValidarMonto(Respuesta<Credito> peticion)
         {
             decimal Total = TotalizarMonto();
             if (Total + peticion.Elemento.Apoyo.ValorApoyo > 600000000)
-                peticion = new Peticion<Persona>(null,"Se ha superado la suma en conjunto del valor máximo de las ayudas: 600.000.000",true);
+                peticion = new Respuesta<Credito>(null,"Se ha superado la suma en conjunto del valor máximo de las ayudas: 600.000.000",true);
             return peticion;
         }
-        public PeticionConsulta<Persona> ConsultarTodos()
+        public RespuestaConsulta<Credito> ConsultarTodos()
         {
-            PeticionConsulta<Persona> peticion = new PeticionConsulta<Persona>();
+            RespuestaConsulta<Credito> peticion = new RespuestaConsulta<Credito>();
             try
             {
-                peticion.Elementos = _contexto.Personas.Include(p => p.Apoyo).ToList();
+                peticion.Elementos = _contexto.Creditos.Include(p => p.Apoyo).ToList();
                 peticion = (peticion.Elementos.Count != 0)? 
-                new PeticionConsulta<Persona>(peticion.Elementos,"Consulta realizada con éxito",false):
-                new PeticionConsulta<Persona>(new List<Persona>(),"No se han encontrado Personas registradas",true);
+                new RespuestaConsulta<Credito>(peticion.Elementos,"Consulta realizada con éxito",false):
+                new RespuestaConsulta<Credito>(new List<Credito>(),"No se han encontrado Creditos registradas",true);
             }
             catch (Exception e)
             {
-                peticion = new PeticionConsulta<Persona>(new List<Persona>(),"Error: " + e.Message,true);
+                peticion = new RespuestaConsulta<Credito>(new List<Credito>(),"Error: " + e.Message,true);
             }
             return peticion;
         }
         public decimal TotalizarMonto()
         {
-            return _contexto.Personas.Sum(p=>p.Apoyo.ValorApoyo);
+            return _contexto.Creditos.Sum(p=>p.Apoyo.ValorApoyo);
         }
     }
 }
