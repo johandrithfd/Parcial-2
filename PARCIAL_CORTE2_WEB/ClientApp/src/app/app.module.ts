@@ -10,6 +10,8 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { AppRoutingModule } from './app-routing.module';
 import { FooterComponent } from './footer/footer.component';
 import { AlertModalComponent } from './@base/alert-modal/alert-modal.component';
+import { RegistroEmpresaComponent } from './Segundo Parcial/Componentes/registro-empresa/registro-empresa.component';
+import { ConsultaEmpresaComponent } from './Segundo Parcial/Componentes/consulta-empresa/consulta-empresa.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { AlertModalComponent } from './@base/alert-modal/alert-modal.component';
     EncabezadoComponent,
     NavMenuComponent,
     FooterComponent,
-    AlertModalComponent
+    AlertModalComponent,
+    RegistroEmpresaComponent,
+    ConsultaEmpresaComponent
   ],
   imports: [
     BrowserModule,
