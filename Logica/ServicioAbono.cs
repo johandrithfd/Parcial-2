@@ -78,12 +78,12 @@ namespace Logica
             }  
         }
 
-        public RespuestaConsulta<Abono> ConsultarTodos()
+        public RespuestaConsulta<Abono> ConsultarTodos(int creditoId)
         {
             RespuestaConsulta<Abono> peticion = new RespuestaConsulta<Abono>();
             try
             {
-                peticion.Elementos = _contexto.Abonos.ToList();
+                peticion.Elementos = _contexto.Abonos.Where(a => a.CreditoId == creditoId).ToList();
                 peticion = (peticion.Elementos.Count != 0) ?
                 new RespuestaConsulta<Abono>(peticion.Elementos, "Consulta realizada con éxito", false) :
                 new RespuestaConsulta<Abono>(new List<Abono>(), "No se han encontrado Abonos registradas", true);
@@ -94,5 +94,7 @@ namespace Logica
             }
             return peticion;
         }
+
+
     }
 }

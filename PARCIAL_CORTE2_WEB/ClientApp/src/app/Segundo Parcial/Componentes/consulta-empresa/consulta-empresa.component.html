@@ -21,7 +21,7 @@
         <td>{{empresa.valorActivos}}</td>
         <td>{{empresa.tipo}}</td>
         <td>{{empresa.credito.valorCredito}}</td>
-        <td><button class="btn-azul">Ver Abonos</button></td>
+        <td><button class="btn-azul" (click)="AbrirConsulta(empresa.credito.creditoId) ">Ver Abonos</button></td>
       </tr>
     </tbody>
   </table>

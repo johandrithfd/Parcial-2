@@ -24,7 +24,7 @@ export class EmpresasService {
       );
   }
 
-  ObtenerTotalDonaciones(empresaId: string): Observable<Respuesta<Empresa>> {
+  buscar(empresaId: string): Observable<Respuesta<Empresa>> {
     return this.http.get<Respuesta<Empresa>>(this.baseUrl + 'api/Empresa/' + empresaId)
       .pipe(
         tap(_ => this.handleErrorService.log('datos enviados')),

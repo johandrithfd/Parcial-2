@@ -16,10 +16,10 @@ namespace PARCIAL_CORTE2_WEB.Controllers
         {
             _servicioAbono = new ServicioAbono(contexto);
         }
-        [HttpGet]
-        public ActionResult<RespuestaConsulta<AbonoViewModel>> Consultar()
+        [HttpGet("{creditoId}")]
+        public ActionResult<RespuestaConsulta<AbonoViewModel>> Consultar(int creditoId)
         {
-            var peticion = _servicioAbono.ConsultarTodos();
+            var peticion = _servicioAbono.ConsultarTodos(creditoId);
             return Ok(peticion);
         }
 

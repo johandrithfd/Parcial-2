@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { EmpresasService } from '../../../services/empresas.service';
 import { Empresa } from '../../Modelos/empresa';
 import { Mensaje } from '../../../services/mensaje';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ConsultaAbonosComponent } from './consulta-abonos/consulta-abonos.component';
 
 @Component({
   selector: 'app-consulta-empresa',
@@ -10,7 +12,7 @@ import { Mensaje } from '../../../services/mensaje';
 })
 export class ConsultaEmpresaComponent implements OnInit {
 
-  constructor(private empresaService: EmpresasService,private mensaje: Mensaje) { }
+  constructor(private empresaService: EmpresasService,private mensaje: Mensaje,private modalService: NgbModal) { }
   empresas: Empresa[] = [];
   ngOnInit(): void {
     this.consultarEmpresas();
@@ -24,6 +26,11 @@ export class ConsultaEmpresaComponent implements OnInit {
       }
       this.mensaje.Informar("Consulta Empresas",e.mensaje);
     });
+  }
+
+  AbrirConsulta(creditoId: number) {
+    const consultaBox = this.modalService.open(ConsultaAbonosComponent)
+        consultaBox.componentInstance.creditoId = creditoId;
   }
 
 }

@@ -12,6 +12,7 @@ import { FooterComponent } from './footer/footer.component';
 import { AlertModalComponent } from './@base/alert-modal/alert-modal.component';
 import { RegistroEmpresaComponent } from './Segundo Parcial/Componentes/registro-empresa/registro-empresa.component';
 import { ConsultaEmpresaComponent } from './Segundo Parcial/Componentes/consulta-empresa/consulta-empresa.component';
+import { ConsultaAbonosComponent } from './Segundo Parcial/Componentes/consulta-empresa/consulta-abonos/consulta-abonos.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ConsultaEmpresaComponent } from './Segundo Parcial/Componentes/consulta
     FooterComponent,
     AlertModalComponent,
     RegistroEmpresaComponent,
-    ConsultaEmpresaComponent
+    ConsultaEmpresaComponent,
+    ConsultaAbonosComponent
   ],
   imports: [
     BrowserModule,

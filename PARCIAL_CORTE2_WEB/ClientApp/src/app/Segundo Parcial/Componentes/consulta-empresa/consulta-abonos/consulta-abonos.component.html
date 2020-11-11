@@ -1,0 +1,39 @@
+<div class="modal-header">
+  <h4 class="modal-title">Consulta de Abonos</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+
+  <div class="container">
+
+    <div *ngIf="abonos.length == 0">
+      <h3>Oh no , No hay Abonos registrados</h3>
+    </div>
+
+    <div *ngIf="abonos && abonos.length">
+      <table class="table table-hover table-sm table-bordered">
+        <thead class="header-table">
+          <tr>
+            <th>Abono Id</th>
+            <th>Fecha</th>
+            <th>valor Abono</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let abono of abonos" >
+            <td>{{abono.abonoId}}</td>
+            <td>{{abono.fecha | date}}</td>
+            <td>{{abono.valorAbono}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Cerrar</button>
+</div>
