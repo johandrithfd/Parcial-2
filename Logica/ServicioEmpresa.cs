@@ -21,10 +21,26 @@ namespace Logica
             Respuesta<Empresa> respuesta = new Respuesta<Empresa>();
             try
             {
-                empresa.AsignarCredito();
-                respuesta = new Respuesta<Empresa>(empresa,$"Los datos de han sido guardados correctamente", false);
-                _contexto.Empresas.Add(respuesta.Elemento);
-                _contexto.SaveChanges();
+                Empresa empresaBuscada = _contexto.Empresas.Find(empresa.EmpresaId);
+                if (empresaBuscada != null)
+                {
+                    respuesta.Mensaje = "Error la identificacion de la empresa ya se encuntra registrada:";
+                }
+                else
+                {
+                    empresa.AsignarCredito();
+                    if (empresa.Credito == null || empresa.Tipo == null)
+                    {
+                        respuesta.Mensaje = "Se ha encontrado Incoherencia en los valores de cantidad de trabajadores y el valor activo";
+                    }
+                    else
+                    {
+                        respuesta = new Respuesta<Empresa>(empresa, $"Los datos de han sido guardados correctamente", false);
+                        _contexto.Empresas.Add(respuesta.Elemento);
+                        _contexto.SaveChanges();
+                    }
+                }
+                
             }
             catch (Exception E)
             {
@@ -38,7 +54,7 @@ namespace Logica
             Respuesta<Empresa> peticion = new Respuesta<Empresa>(new Empresa());
             try
             {
-                peticion.Elemento = _contexto.Empresas.Find(Identificacion);
+                peticion.Elemento = ConsultarTodos().Elementos.Where(e => e.EmpresaId == Identificacion).First();
                 peticion = (peticion.Elemento == null) ? new Respuesta<Empresa>(null,$"La Empresa con numero {Identificacion} no se encuentra registrada",true):
                 new Respuesta<Empresa>(peticion.Elemento,"Empresa encontrada",false);
             }
