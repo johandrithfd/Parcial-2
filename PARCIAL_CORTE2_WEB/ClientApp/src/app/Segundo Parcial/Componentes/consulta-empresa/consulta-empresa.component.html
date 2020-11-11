@@ -1,1 +1,28 @@
-<p>consulta-empresa works!</p>
+<div class="container">
+  <h2>Consulta de Empresas</h2>
+
+  <table class="table table-hover table-sm table-bordered">
+    <thead class="header-table">
+      <tr>
+        <th>Nombre</th>
+        <th>Id Empresa</th>
+        <th>cantidadTrabajadores</th>
+        <th>valorActivos</th>
+        <th>tipo</th>
+        <th>Deuda Actual</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let empresa of empresas" >
+        <td>{{empresa.nombre}}</td>
+        <td>{{empresa.empresaId}}</td>
+        <td>{{empresa.cantidadTrabajadores}}</td>
+        <td>{{empresa.valorActivos}}</td>
+        <td>{{empresa.tipo}}</td>
+        <td>{{empresa.credito.valorCredito}}</td>
+        <td><button class="btn-azul">Ver Abonos</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

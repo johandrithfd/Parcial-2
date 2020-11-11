@@ -1,0 +1,72 @@
+.cabecera{
+  background-color: rgb(1,124,104);
+  height: 14%;
+}
+.cabecera-formulario {
+  background-color:rgb(1,124,104);
+  height: 40px;
+  padding: 5;
+  margin-bottom: 14px;
+}
+.cabecera-formulario p{
+  text-align:center;
+  font-size: 20px;
+  color: ivory;
+}
+
+.img {
+  margin-left: 70px;
+  margin-top: 70px;
+}
+
+.ditancia-jumbotrom{
+  margin-top: 28px;
+}
+.card {
+margin: 0 auto;
+float: none;
+margin-bottom: 10px;
+}
+
+.btn-guardar
+{
+color: white;
+background-color: rgb(1, 99, 124);
+border-radius: 6px;
+font-size: 18px;
+border: 2px solid rgb(1, 99, 124);
+padding: 16;
+height: 37px;
+margin: 5px;
+}
+.btn-cancelar
+{
+color: white;
+background-color:  #213e3b;
+border-radius: 6px;
+font-size: 18px;
+border: 2px solid #213e3b;
+padding: 16;
+height: 37px;
+margin: 5px;
+}
+.btn-cancelar i
+{
+padding-right: 15px;
+}
+.btn-guardar i
+{
+padding-right: 15px;
+}
+.btn-guardar:hover
+{
+color: rgb(231, 236, 241);
+background-color: rgb(2, 76, 95);
+border: 2px solid rgb(2, 76, 95);
+}
+.btn-cancelar:hover
+{
+color: rgb(231, 236, 241);
+background-color:  #172c2a;
+border: 2px solid  #172c2a;
+}
