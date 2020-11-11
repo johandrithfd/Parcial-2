@@ -20,9 +20,18 @@ namespace Logica
             Respuesta<Abono> respuesta = new Respuesta<Abono>();
             try
             {
-                respuesta = new Respuesta<Abono>(Abono, $"Los datos de han sido guardados correctamente", false);
-                _contexto.Abonos.Add(respuesta.Elemento);
-                _contexto.SaveChanges();
+                string respuestaActualizar = ActualizarCredito(Abono);
+                if(respuestaActualizar.Equals("Execede"))
+                {
+                    respuesta.Mensaje = "error el valor es excedido al de la deuda";
+                    respuesta.Elemento = null;
+                }
+                else
+                {
+                    respuesta = new Respuesta<Abono>(Abono, $"Los datos de han sido guardados correctamente", false);
+                    _contexto.Abonos.Add(respuesta.Elemento);
+                    _contexto.SaveChanges();
+                }
             }
             catch (Exception E)
             {
@@ -31,11 +40,42 @@ namespace Logica
             }
             return respuesta;
         }
-        public void ActualizarCredito (Abono abono)
+        public string ActualizarCredito (Abono abono)
         {
-            Empresa empresa = _contexto.Empresas.Find(abono.CreditoId);
-            empresa.Credito.AbonarCredito(abono.ValorAbono);
-            
+            Credito credito = _contexto.Creditos.Find(abono.CreditoId);
+            string respuesta = ObtenerRespuestaAbono(credito,abono);
+            if(respuesta.Equals("Execede"))
+            {
+                return "Execede";
+            }
+            else
+            {
+                if(respuesta.Equals("Pagado"))
+                {
+                    credito.Estado = "Pagado"; 
+                }
+                credito.AbonarCredito(abono.ValorAbono);
+                return "Abono Realizado Con exito";
+            }
+        }
+        public string ObtenerRespuestaAbono (Credito credito,Abono abono)
+        {
+            decimal valor = credito.ValorCredito - abono.ValorAbono;
+            if(valor < 0)
+            {
+                return "Execede";
+            }
+            else
+            {
+                if(valor == 0)
+                {
+                    return "Pagado";
+                }
+                else
+                {
+                    return "en deuda";
+                }
+            }  
         }
 
         public RespuestaConsulta<Abono> ConsultarTodos()
