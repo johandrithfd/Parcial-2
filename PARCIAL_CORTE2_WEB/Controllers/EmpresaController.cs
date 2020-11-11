@@ -1,5 +1,3 @@
-
-
 using Datos;
 using Entidad;
 using Logica;
@@ -10,14 +8,13 @@ namespace PARCIAL_CORTE2_WEB.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EmpresaController
+    public class EmpresaController : ControllerBase
     {
         private readonly ServicioEmpresa _servicioEmpresa;
         public EmpresaController(CreditoContext contexto)
         {
             _servicioEmpresa = new ServicioEmpresa(contexto);
         }
-
         [HttpGet]
         private ActionResult<RespuestaConsulta<EmpresaViewModel>> Consultar()
         {
@@ -33,7 +30,12 @@ namespace PARCIAL_CORTE2_WEB.Controllers
             var peticion = _servicioEmpresa.Guardar(Empresa);
             return Ok(peticion);
         }
-
+        [HttpGet("{identificacion}")]
+        public ActionResult<Respuesta<EmpresaViewModel>> BuscarEmpresa(string identificacion)
+        {
+            var peticion = _servicioEmpresa.BuscarPorIdentificacion(identificacion);
+            return Ok(peticion);
+        }
         private Empresa MapearEmpresa(EmpresaInputModel EmpresaInput)
         {
             Empresa empresa = new Empresa
