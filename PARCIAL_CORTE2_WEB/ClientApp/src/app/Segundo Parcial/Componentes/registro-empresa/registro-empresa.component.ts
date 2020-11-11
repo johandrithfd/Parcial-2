@@ -17,9 +17,10 @@ export class RegistroEmpresaComponent implements OnInit {
   constructor(private empresaService: EmpresasService,private mensaje: Mensaje,private formBuilder : FormBuilder) { }
 
   ngOnInit(): void {
+    this.EstablecerValidacionesFormulario();
   }
 
-  consultarEmpresas() {
+  registrarEmpresa() {
     this.empresaService.post(this.empresa).subscribe(e => {
       if (!e.error)
       {
