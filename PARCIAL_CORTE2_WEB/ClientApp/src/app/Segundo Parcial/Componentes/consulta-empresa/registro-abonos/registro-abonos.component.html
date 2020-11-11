@@ -1,0 +1,31 @@
+<div class="modal-header">
+  <h4 class="modal-title">Consulta de Abonos</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+
+  <div class="container">
+    <form [formGroup]="formularioRegistro">
+      
+        <div class="form-group">
+          <label>Valor Activos :</label>
+          <input type="number" name="valorAbono" formControlName ="valorAbono" [(ngModel)]="abono.valorAbono"  placeholder ="aqui valorAbono" class="form-control">
+          <div
+            *ngIf="valorAbono.invalid && (valorAbono.dirty || valorAbono.touched)" class="alert alert-danger">
+            <div *ngIf="valorAbono.errors.required || valorAbono.errors.pattern">
+              el valorAbono es requerido
+            </div>
+            <div *ngIf="valorAbono.errors.pattern">
+              el valorAbono solo debe tener numeros
+            </div>
+          </div>
+        </div>
+
+        <button (click) = "registrarAbono()" [disabled]="formularioRegistro.invalid"><i class="fas fa-save"></i>Registrar Abono</button>
+    </form>
+  </div>
+
+</div>
+

@@ -4,6 +4,7 @@ import { Empresa } from '../../Modelos/empresa';
 import { Mensaje } from '../../../services/mensaje';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConsultaAbonosComponent } from './consulta-abonos/consulta-abonos.component';
+import { RegistroAbonosComponent } from './registro-abonos/registro-abonos.component';
 
 @Component({
   selector: 'app-consulta-empresa',
@@ -30,6 +31,11 @@ export class ConsultaEmpresaComponent implements OnInit {
 
   AbrirConsulta(creditoId: number) {
     const consultaBox = this.modalService.open(ConsultaAbonosComponent)
+        consultaBox.componentInstance.creditoId = creditoId;
+  }
+
+  AbrirRegistro(creditoId: number) {
+    const consultaBox = this.modalService.open(RegistroAbonosComponent)
         consultaBox.componentInstance.creditoId = creditoId;
   }
 

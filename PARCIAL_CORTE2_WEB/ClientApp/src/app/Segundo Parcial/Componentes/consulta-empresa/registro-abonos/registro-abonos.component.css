@@ -1,0 +1,17 @@
+.btn-azul
+{
+  color: white;
+  background-color: rgb(28, 58, 181);
+  border-radius: 6px;
+  font-size: 18px;
+  border: 2px solid rgb(28, 58, 181);
+  height: 37px;
+  margin: 0;
+}
+
+.btn-azul:hover
+{
+  color: rgb(231, 236, 241);
+  background-color: rgb(15, 36, 118);
+  border: 2px solid rgb(15, 36, 118);
+}
