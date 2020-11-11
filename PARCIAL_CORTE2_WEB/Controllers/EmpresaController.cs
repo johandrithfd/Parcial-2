@@ -16,7 +16,7 @@ namespace PARCIAL_CORTE2_WEB.Controllers
             _servicioEmpresa = new ServicioEmpresa(contexto);
         }
         [HttpGet]
-        private ActionResult<RespuestaConsulta<EmpresaViewModel>> Consultar()
+        public ActionResult<RespuestaConsulta<EmpresaViewModel>> Consultar()
         {
             var peticion = _servicioEmpresa.ConsultarTodos();
             return Ok(peticion);
@@ -41,7 +41,7 @@ namespace PARCIAL_CORTE2_WEB.Controllers
             Empresa empresa = new Empresa
             {
                 CantidadTrabajadores = EmpresaInput.CantidadTrabajadores,
-                Nombre = EmpresaInput.EmpresaId,
+                Nombre = EmpresaInput.Nombre,
                 ValorActivos = EmpresaInput.ValorActivos,
                 EmpresaId = EmpresaInput.EmpresaId
             };

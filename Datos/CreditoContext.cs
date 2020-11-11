@@ -18,7 +18,7 @@ namespace Datos
             constructoDeModelo.Entity<Abono>()
                     .HasOne<Credito>()
                     .WithMany()
-                    .HasForeignKey(A => A.AbonoId);
+                    .HasForeignKey(A => A.CreditoId);
         }
     }
 }

@@ -18,16 +18,21 @@ namespace Entidad
         public string Tipo { get; set; }
         public virtual Credito Credito { get; set; }
 
+        public Empresa()
+        {
+            Credito = new Credito();
+           
+        }
 
         public void AsignarTipo()
         {
             decimal salarioMinimo = 877800;
             decimal valorActivoMaximo;
             decimal valorActivoMinimo;
-            if ((CantidadTrabajadores >= 1 && CantidadTrabajadores <= 10) )
+            if ((CantidadTrabajadores >= 1 && CantidadTrabajadores <= 10))
             {
                 valorActivoMaximo = salarioMinimo * 501;
-                if (valorActivoMaximo <= ValorActivos)
+                if (valorActivoMaximo >= ValorActivos)
                 {
                     Tipo = "Microempresa";
                 }

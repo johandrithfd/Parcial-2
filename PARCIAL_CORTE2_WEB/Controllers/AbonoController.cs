@@ -7,6 +7,8 @@ using PARCIAL_CORTE2_WEB.Models;
 
 namespace PARCIAL_CORTE2_WEB.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class AbonoController : ControllerBase
     {
         private readonly ServicioAbono _servicioAbono;
@@ -15,7 +17,7 @@ namespace PARCIAL_CORTE2_WEB.Controllers
             _servicioAbono = new ServicioAbono(contexto);
         }
         [HttpGet]
-        private ActionResult<RespuestaConsulta<AbonoViewModel>> Consultar()
+        public ActionResult<RespuestaConsulta<AbonoViewModel>> Consultar()
         {
             var peticion = _servicioAbono.ConsultarTodos();
             return Ok(peticion);
