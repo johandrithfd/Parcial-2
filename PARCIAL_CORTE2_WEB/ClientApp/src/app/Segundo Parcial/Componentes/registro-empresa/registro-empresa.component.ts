@@ -22,10 +22,6 @@ export class RegistroEmpresaComponent implements OnInit {
 
   registrarEmpresa() {
     this.empresaService.post(this.empresa).subscribe(e => {
-      if (!e.error)
-      {
-        this.empresa = e.elemento;
-      }
       this.mensaje.Informar("Consulta Empresas",e.mensaje);
     });
   }
